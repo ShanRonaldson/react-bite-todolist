@@ -8,14 +8,15 @@ import { IToDoList } from "./Interfaces";
 
 const App: FC = () => {
   const [task, setTask] = useState<string>("");
-  const [date, setDate] = useState<Date | null>(null);
+  const [date, setDate] = useState<string | null>(null);
   const [todo, setToDo] = useState<IToDoList[]>([]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.name === "task") {
       setTask(event.target.value);
     } else {
-      setDate(new Date(event.target.value));
+      console.log("date " + event.target.value);
+      setDate(event.target.value);
     }
   };
 
@@ -24,6 +25,14 @@ const App: FC = () => {
     setToDo([...todo, newToDo]);
     setTask("");
     setDate(null);
+  };
+
+  const deleteTask = (taskNameToDelete: string): void => {
+    setToDo(
+      todo.filter((task) => {
+        return task.taskName !== taskNameToDelete;
+      })
+    );
   };
 
   return (
@@ -45,6 +54,8 @@ const App: FC = () => {
             name="date"
             id="date"
             placeholder="Date"
+            required
+            pattern="\d{4}-\d{2}-\d{2}"
             onChange={handleChange}
           />
         </div>
@@ -55,7 +66,7 @@ const App: FC = () => {
       </div>
       <div className="todoList">
         {todo.map((task: IToDoList, key: number) => {
-          return <ToDoList key={key} task={task} />;
+          return <ToDoList key={key} task={task} deleteTask={deleteTask}/>;
         })}
       </div>
     </div>

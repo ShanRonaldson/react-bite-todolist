@@ -1,4 +1,4 @@
 export interface IToDoList{
     taskName: string;
-    taskDate: Date | null;
+    taskDate: string | null;
 }

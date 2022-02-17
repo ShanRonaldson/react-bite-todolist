@@ -5,45 +5,84 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
-
 }
 
-.header{
+.header {
   flex: 30%;
-  background-color: lavenderblush;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 2rem;
+  border: 1px lavender solid;
+  box-shadow: 3px 17px 10px -8px rgba(0, 0, 0, 0.26);
+  -webkit-box-shadow: 3px 17px 10px -8px rgba(0, 0, 0, 0.26);
+  -moz-box-shadow: 3px 17px 10px -8px rgba(0, 0, 0, 0.26);
 }
 
-.header .inputContainer{
+.header > * {
+  margin: 1rem;
+}
+
+.header .inputContainer {
   display: flex;
   flex-direction: column;
 }
 
-.header input{
-  width: 200px;
-  height: 40px;
-  border: none;
-  border-bottom-left-radius: 8px;
-  border-top-left-radius: 8px;
-  padding-left: 10px;
+.header .inputContainer > * {
+  margin: 0.15rem;
+}
+
+.header input {
+  min-width: 200px;
+  min-height: 40px;
+  border-radius: 8px;
+  padding: 0 10px;
   font-size: 17px;
   border: 1px solid grey;
 }
 
-.header button{
-  width: 70px;
-  height: 87px;
-  border: none;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-  padding-left: 10px;
-  cursor: pointer;
+.todoList {
+  flex: 70% 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.todoList{
-  flex: 70%;
-  width: 100%;
+.task {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 2rem;
+  min-height: 1rem;
+  color: black;
+  margin: 15px;
+}
+
+.task .content {
+  flex: 80% 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.task .content div {
+  display: grid;
+  place-items: center;
+  border: 1px solid white;
+  height: 100%;
+  font-size: 18px;
+  border-right: none;
+  margin-left: 10px;
+}
+
+.taskName {
+  min-width: 15rem;
+}
+
+.content div:last-child{
+  margin-right:2rem
 }
