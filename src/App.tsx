@@ -21,8 +21,9 @@ export const App: FC = () => {
 
   return (
     <>
-      <ToDoList tasks={tasks} deleteTask={deleteTask} />
       <AddTask />
+      <ToDoList tasks={tasks} deleteTask={deleteTask} />
+
     </>
   )
 

@@ -1,55 +1,40 @@
-import React, { FC, useState, ChangeEvent } from "react";
+import React, { useState } from "react";
+import { ToDo } from "../Interfaces/ToDoListInterface"
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
+import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select'
+import Select from '@mui/material/Select';
 
 
 export const AddTask: React.FC = () => {
 
+    const [todo, setToDo] = useState<ToDo[]>([]);
+    const [name, setName] = useState<string>("");
+    const [date, setDate] = useState<string | null>(null);
     const [priority, setPriority] = useState<string>("");
 
-    const handlePriorityChange = (event: SelectChangeEvent): void => {
-        setPriority(event.target.value);
-      }
-/* const [task, setTask] = useState<string>("");
-  const [date, setDate] = useState<string | null>(null);
-  const [priority, setPriority] = useState<string>("");
-  const [todo, setToDo] = useState<ToDo[]>([]);
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    if (event.target.name === "task") {
-      setTask(event.target.value);
-    } else {
-      console.log("date " + event.target.value);
-      setDate(event.target.value);
-    }
-  };
-
-  const handleSubmit = (): void => {
-    const newToDo = { taskName: task, taskDate: date, taskPriority: priority };
-    setToDo([...todo, newToDo]);
-    setTask("");
-    setDate(null);
-  };
-
-*/
-
+    const handleSubmit = (): void => {
+        const newToDo = { taskName: name, taskDate: date, taskPriority: priority };
+        setToDo([...todo, newToDo]);
+        setName("");
+        setDate(null);
+    };
 
 
     return (
         <div className="header">
             <div className="inputContainer">
                 <TextField
-                    name="task"
-                    id="task"
+                    name="taskName"
+                    id="taskName"
                     placeholder="Task..."
                     rows={4}
                     multiline
-                    onChange={handleChange}
-                    value={task}
+                    onChange={e => setName(e.target.value)}
+                    value={name}
                 />
 
                 <input
@@ -59,12 +44,26 @@ export const AddTask: React.FC = () => {
                     placeholder="Date"
                     required
                     pattern="\d{4}-\d{2}-\d{2}"
-                    onChange={handleChange}
+                    onChange={e => setDate(e.target.value)}
                 />
 
-                <div>
-                    <select></select>
-                </div>
+                <Box sx={{m: 1, minWidth: 120 }}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Priority</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={priority}
+                            label="Age"
+                            onChange={e => setPriority(e.target.value)}
+                            autoWidth
+                        >
+                            <MenuItem value={'low'}>Low</MenuItem>
+                            <MenuItem value={'med'}>Medium</MenuItem>
+                            <MenuItem value={'high'}>High</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box>
             </div>
 
 
