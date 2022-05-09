@@ -1,7 +1,6 @@
 
 import { FC, useState } from "react";
 import "./App.css";
-import ToDoList from "./Components/ToDoList";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import Box from '@mui/material/Box';
@@ -84,17 +83,31 @@ export const App: FC = () => {
           Add Task
         </Button>
       </div>
-      <ToDoList tasks={tasks} deleteTask={deleteTask} />
+
+      <div className="">
+        {tasks.map((task, key: number) => {
+          return (
+            <div className="task" key={key}>
+              <div className="content">
+                <div className="taskName">{task.taskName}</div>
+                <div className="taskDate">{(task.taskDate != null) ? task.taskDate : ''}</div>
+                <div className="taskPriority">{task.taskPriority}</div>
+              </div>
+
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={() => {
+                  deleteTask(task.taskName);
+                }}
+              >
+                X
+              </Button>
+            </div>
+          )
+        })}
+      </div>
 
     </>
   )
-
-
 };
-
-/*
-configured from https://dev.to/joelynn/react-hooks-working-with-state-arrays-2n2g
-https://www.youtube.com/watch?v=bjnW2NLAofI
-
-https://typeofnan.dev/your-first-react-typescript-project-todo-app/
-*/
